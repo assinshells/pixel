@@ -27,4 +27,4 @@ export const AppProvider = ({ children }) => {
   );
 };
 
-const useApp = () => useContext(AppContext);
+export const useApp = () => useContext(AppContext);

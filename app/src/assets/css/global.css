@@ -1,11 +1,33 @@
 body {
   background-color: #f8f9fa;
   min-height: 100vh;
-  padding: 20px;
 }
 
 canvas {
   border: 2px solid #333;
   image-rendering: pixelated;
   background: #fff;
+}
+
+/* Footer hover effects */
+.hover-link {
+  transition: color 0.2s ease;
+}
+
+.hover-link:hover {
+  color: #198754 !important;
+}
+
+footer a {
+  transition: all 0.2s ease;
+}
+
+footer a:hover {
+  transform: translateY(-2px);
+  color: #198754 !important;
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
 }
