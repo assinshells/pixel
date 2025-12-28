@@ -1,9 +1,9 @@
-const BLOCK_SIZE = 10;
-const GRID_SIZE = 1000;
-const BLOCKS = GRID_SIZE / BLOCK_SIZE;
-const BLOCK_PRICE = 100;
+export const BLOCK_SIZE = 10;
+export const GRID_SIZE = 1000;
+export const BLOCKS = GRID_SIZE / BLOCK_SIZE;
+export const BLOCK_PRICE = 100;
 
-const ADS_CONFIG = [
+export const ADS_CONFIG = [
   {
     blocks: [{ x: 5, y: 5 }],
     bannerUrl:

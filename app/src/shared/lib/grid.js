@@ -1,2 +1,2 @@
 import { BLOCKS } from "@/shared/config/constants";
-const getBlockIndex = (x, y) => y * BLOCKS + x;
+export const getBlockIndex = (x, y) => y * BLOCKS + x;

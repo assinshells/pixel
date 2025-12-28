@@ -3,7 +3,7 @@ import { useApp } from "@/app/providers/AppProvider";
 import { GRID_SIZE, BLOCKS, BLOCK_SIZE } from "@/shared/config/constants";
 import { getBlockIndex } from "@/shared/lib/grid";
 
-const CanvasGrid = () => {
+export const CanvasGrid = () => {
   const canvasRef = useRef(null);
   const { gridModel, adsModel } = useApp();
 

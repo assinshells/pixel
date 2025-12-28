@@ -2,7 +2,7 @@ import { useState } from "react";
 import { BLOCKS } from "@/shared/config/constants";
 import { getBlockIndex } from "@/shared/lib/grid";
 
-const useGridModel = () => {
+export const useGridModel = () => {
   const [blocks, setBlocks] = useState(new Uint8Array(BLOCKS * BLOCKS));
   const [selectedBlocks, setSelectedBlocks] = useState(new Set());
   const [selectedCount, setSelectedCount] = useState(0);

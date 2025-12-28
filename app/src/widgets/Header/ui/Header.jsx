@@ -3,7 +3,7 @@ import { Button } from "@/shared/ui/Button/Button";
 import { useApp } from "@/app/providers/AppProvider";
 import { formatPrice } from "@/shared/lib/format";
 
-const Header = ({ onPurchaseClick }) => {
+export const Header = ({ onPurchaseClick }) => {
   const { gridModel } = useApp();
   const navItems = [
     "World",

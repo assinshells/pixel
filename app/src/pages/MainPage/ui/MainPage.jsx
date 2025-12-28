@@ -3,7 +3,7 @@ import { Header } from "@/widgets/Header/ui/Header";
 import { CanvasGrid } from "@/widgets/CanvasGrid/ui/CanvasGrid";
 import { PurchaseModal } from "@/features/purchase/ui/PurchaseModal";
 
-const MainPage = () => {
+export const MainPage = () => {
   const [showModal, setShowModal] = useState(false);
 
   return (

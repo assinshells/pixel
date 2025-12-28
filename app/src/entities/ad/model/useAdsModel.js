@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ADS_CONFIG } from "@/shared/config/constants";
 
-const useAdsModel = () => {
+export const useAdsModel = () => {
   const [purchasedAds, setPurchasedAds] = useState([]);
 
   const loadAds = async () => {

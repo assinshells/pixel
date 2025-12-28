@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "@/shared/ui/Button/Button";
 
-const FileUpload = ({ file, previewUrl, onFileSelect, onRemove }) => {
+export const FileUpload = ({ file, previewUrl, onFileSelect, onRemove }) => {
   const handleDrop = (e) => {
     e.preventDefault();
     const droppedFile = e.dataTransfer.files[0];

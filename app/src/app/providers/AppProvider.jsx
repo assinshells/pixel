@@ -3,9 +3,9 @@ import { useGridModel } from "@/entities/grid/model/useGridModel";
 import { useAdsModel } from "@/entities/ad/model/useAdsModel";
 import { usePurchaseModel } from "@/features/purchase/model/usePurchaseModel";
 
-const AppContext = createContext(null);
+export const AppContext = createContext(null);
 
-const AppProvider = ({ children }) => {
+export const AppProvider = ({ children }) => {
   const gridModel = useGridModel();
   const adsModel = useAdsModel();
   const purchaseModel = usePurchaseModel();

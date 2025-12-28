@@ -1,8 +1,8 @@
 import { BLOCK_PRICE } from "@/shared/config/constants";
 
-const formatPrice = (count) => (count * BLOCK_PRICE).toLocaleString();
+export const formatPrice = (count) => (count * BLOCK_PRICE).toLocaleString();
 
-const formatBlockCoordinates = (selectedBlocks) => {
+export const formatBlockCoordinates = (selectedBlocks) => {
   return Array.from(selectedBlocks)
     .map((key) => {
       const [x, y] = key.split(",").map(Number);

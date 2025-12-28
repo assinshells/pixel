@@ -6,7 +6,7 @@ import { useApp } from "@/app/providers/AppProvider";
 import { formatBlockCoordinates, formatPrice } from "@/shared/lib/format";
 import { BLOCK_PRICE } from "@/shared/config/constants";
 
-const PurchaseModal = ({ isOpen, onClose }) => {
+export const PurchaseModal = ({ isOpen, onClose }) => {
   const { gridModel, purchaseModel } = useApp();
 
   if (!isOpen) return null;

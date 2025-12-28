@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const usePurchaseModel = () => {
+export const usePurchaseModel = () => {
   const [formData, setFormData] = useState({
     buyerEmail: "",
     buyerName: "",
