@@ -1,8 +1,9 @@
-// Конфигурация рекламных баннеров
-// Продавец редактирует этот файл для добавления новых баннеров
+const BLOCK_SIZE = 10;
+const GRID_SIZE = 1000;
+const BLOCKS = GRID_SIZE / BLOCK_SIZE;
+const BLOCK_PRICE = 100;
 
 const ADS_CONFIG = [
-  // Пример 1: Одиночный блок (1x1)
   {
     blocks: [{ x: 5, y: 5 }],
     bannerUrl:
@@ -10,8 +11,6 @@ const ADS_CONFIG = [
     websiteUrl: "https://example.com",
     altText: "Example 1x1 Advertisement",
   },
-
-  // Пример 2: Блок 5x5 (25 блоков)
   {
     blocks: [
       { x: 10, y: 10 },
@@ -45,30 +44,4 @@ const ADS_CONFIG = [
     websiteUrl: "https://bigcompany.com",
     altText: "Premium 5x5 Advertisement Space",
   },
-
-  // ========================================
-  // ИНСТРУКЦИЯ ДЛЯ ДОБАВЛЕНИЯ НОВЫХ БАННЕРОВ:
-  // ========================================
-  //
-  // 1. Получите от покупателя:
-  //    - Координаты блоков (выводятся в console.log)
-  //    - Файл баннера
-  //    - URL сайта
-  //    - Описание
-  //
-  // 2. Загрузите баннер на сервер (в папку banners/)
-  //
-  // 3. Добавьте новый объект в массив выше:
-  //
-  // ,{
-  //   blocks: [
-  //     {x: 0, y: 0}, {x: 1, y: 0}  // координаты из console.log
-  //   ],
-  //   bannerUrl: 'banners/client-banner.jpg',  // путь к загруженному баннеру
-  //   websiteUrl: 'https://client-website.com',
-  //   altText: 'Client Advertisement Description'
-  // }
-  //
-  // 4. Сохраните файл и загрузите на сервер
-  //
 ];
