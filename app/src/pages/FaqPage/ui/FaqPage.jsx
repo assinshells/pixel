@@ -5,374 +5,186 @@ import { PurchaseModal } from "@/features/purchase/ui/PurchaseModal";
 
 export const FaqPage = () => {
   const [showModal, setShowModal] = useState(false);
+
+  const faqData = [
+    {
+      question: "Что такое BlockStorm?",
+      answer:
+        "BlockStorm — это инновационная рекламная платформа с пиксельной сеткой 1000×1000 пикселей, разбитой на 10,000 блоков размером 10×10 пикселей каждый. Каждый блок — это рекламное место для размещения баннера с активной ссылкой на ваш сайт.",
+    },
+    {
+      question: "Сколько стоит размещение и есть ли бесплатный период?",
+      answer:
+        "Стоимость одного блока составляет $100. Каждый новый рекламодатель получает бесплатное тестовое размещение сроком на 5 дней, чтобы оценить эффективность формата. После окончания бесплатного периода вы можете приобрести блоки для постоянного размещения.",
+    },
+    {
+      question: "Как работает процесс покупки и размещения?",
+      answer:
+        "Процесс очень простой: выберите нужное количество свободных блоков на сетке, нажмите на иконку корзины, заполните форму (email, название компании, URL сайта, описание), загрузите баннер и отправьте заявку.",
+    },
+    {
+      question: "Что происходит после окончания бесплатного периода?",
+      answer:
+        "По окончании 5-дневного бесплатного периода вы получите уведомление на email с предложением оплатить блоки для продолжения размещения. Если оплата не поступит в течение 3 дней, ваш баннер будет временно скрыт, но данные сохранятся. Вы сможете возобновить размещение в любой момент после оплаты.",
+    },
+    {
+      question: "Можно ли купить несколько блоков и какие есть ограничения?",
+      answer:
+        "Да, вы можете приобрести любое количество свободных блоков — от одного до нескольких сотен. Минимальная покупка — 1 блок ($100), максимальная не ограничена (если блоки доступны).",
+    },
+    {
+      question: "Какие требования к баннеру?",
+      answer:
+        "Баннер должен быть в формате PNG, JPG, размером не более 5MB. Размер изображения должен соответствовать выбранному количеству блоков (1 блок = 10×10 пикселей). Запрещены: порнография, азартные игры, пропаганда насилия, незаконная деятельность, мошеннические схемы. Баннер должен быть качественным и читаемым.",
+    },
+    {
+      question:
+        "Можно ли изменить баннер, ссылку или описание после размещения?",
+      answer:
+        "Да, вы можете изменить баннер, целевую ссылку или описание в любое время. Для этого свяжитесь с нашей службой поддержки, указав email, который использовался при регистрации. Первое изменение бесплатно, последующие изменения — $20 за обновление.",
+    },
+    {
+      question: "Какие способы оплаты вы принимаете?",
+      answer:
+        "Мы принимаем все основные способы онлайн-оплаты: кредитные и дебетовые карты (Visa, Mastercard), PayPal, криптовалюты (Bitcoin, Ethereum, USDT).",
+    },
+    {
+      question: "На какой срок покупаются блоки?",
+      answer:
+        "Блоки покупаются навсегда — это единоразовая оплата без абонентской платы. После оплаты ваш баннер остаётся на сайте постоянно, пока работает платформа. Это делает BlockStorm выгодным долгосрочным вложением в рекламу.",
+    },
+    {
+      question: "Возможен ли возврат денег?",
+      answer:
+        "Возврат средств возможен в течение 7 дней после покупки, если ваш баннер ещё не был опубликован или если возникла техническая ошибка с нашей стороны. После публикации баннера возврат не производится, так как рекламное место считается использованным.",
+    },
+    {
+      question: "Есть ли ограничения по тематике сайтов?",
+      answer:
+        "Мы принимаем рекламу большинства легальных тематик: бизнес, технологии, образование, развлечения, товары и услуги. Запрещены: сайты для взрослых, азартные игры (в юрисдикциях, где они незаконны), пиратский контент, мошеннические схемы, продажа нелегальных товаров, экстремистский контент.",
+    },
+    {
+      question: "Как узнать, какие блоки свободны?",
+      answer:
+        "На главной странице отображается интерактивная сетка, где: серые блоки — свободны для покупки, зелёные — выбраны вами (добавлены в корзину), цветные с изображениями — уже проданы. Вы можете кликать по свободным блокам, чтобы добавить их в корзину.",
+    },
+    {
+      question: "Что если мой сайт изменит адрес?",
+      answer:
+        "Вы можете бесплатно обновить URL вашего сайта один раз. Последующие изменения URL стоят $20 за обновление. Свяжитесь с поддержкой через контактную форму или email с указанием старого и нового адреса.",
+    },
+    {
+      question: "Как связаться со службой поддержки?",
+      answer:
+        "Служба поддержки доступна по email: support@blockstorm.com (ответ в течение 24 часов). Также вы можете использовать форму обратной связи в разделе 'Контакты'. Для срочных вопросов доступен онлайн-чат (иконка в правом нижнем углу), работающий с 9:00 до 21:00 по Киевскому времени.",
+    },
+    {
+      question: "Могу ли я продать или передать свои блоки кому-то другому?",
+      answer:
+        "Да, вы можете передать право владения блоками другому лицу. Для этого необходимо подать заявку в службу поддержки с указанием данных нового владельца (email, название компании). Процедура передачи занимает 2-3 рабочих дня и стоит $50.",
+    },
+  ];
+
   return (
     <div className="d-flex flex-column min-vh-100">
       <Header onPurchaseClick={() => setShowModal(true)} />
-      <main className="flex-grow-1 bg-light py-5">
+      <main className="flex-grow-1 py-5" style={{ backgroundColor: "#f8f9fa" }}>
         <div className="container">
           <div className="row justify-content-center">
-            <div class="accordion accordion-flush" id="accordionFlushExample">
-              <div class="accordion-item">
-                <h2 class="accordion-header">
-                  <button
-                    class="accordion-button collapsed"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#flush-collapseOne"
-                    aria-expanded="false"
-                    aria-controls="flush-collapseOne"
-                  >
-                    Что это за сайт?
-                  </button>
-                </h2>
-                <div
-                  id="flush-collapseOne"
-                  class="accordion-collapse collapse"
-                  data-bs-parent="#accordionFlushExample"
-                >
-                  <div class="accordion-body">
-                    Это рекламная платформа с пиксельной сеткой, разбитой на
-                    блоки. Каждый блок — это рекламное место для размещения
-                    баннера с активной ссылкой на ваш сайт.
-                  </div>
-                </div>
+            <div className="col-lg-10">
+              <div className="text-center mb-5">
+                <h1 className="display-4 fw-bold mb-3">
+                  Часто задаваемые вопросы
+                </h1>
+                <p className="lead text-muted">
+                  Всё, что нужно знать о размещении рекламы на BlockStorm
+                </p>
               </div>
-              <div class="accordion-item">
-                <h2 class="accordion-header">
-                  <button
-                    class="accordion-button collapsed"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#flush-collapseTwo"
-                    aria-expanded="false"
-                    aria-controls="flush-collapseTwo"
+
+              <div className="accordion" id="faqAccordion">
+                {faqData.map((item, index) => (
+                  <div
+                    className="accordion-item border-0 shadow-sm mb-3"
+                    key={index}
                   >
-                    Есть ли бесплатное размещение?
-                  </button>
-                </h2>
-                <div
-                  id="flush-collapseTwo"
-                  class="accordion-collapse collapse"
-                  data-bs-parent="#accordionFlushExample"
-                >
-                  <div class="accordion-body">
-                    Да. Каждый новый рекламодатель получает бесплатное
-                    размещение баннера сроком на 5 дней, чтобы протестировать
-                    формат и оценить эффективность.
+                    <h2 className="accordion-header">
+                      <button
+                        className="accordion-button collapsed fw-semibold"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target={`#collapse${index}`}
+                        aria-expanded="false"
+                        aria-controls={`collapse${index}`}
+                        style={{
+                          backgroundColor: "#fff",
+                          fontSize: "1.1rem",
+                        }}
+                      >
+                        <span className="text-success me-2">Q{index + 1}.</span>
+                        {item.question}
+                      </button>
+                    </h2>
+                    <div
+                      id={`collapse${index}`}
+                      className="accordion-collapse collapse"
+                      data-bs-parent="#faqAccordion"
+                    >
+                      <div
+                        className="accordion-body"
+                        style={{
+                          fontSize: "1rem",
+                          lineHeight: "1.7",
+                        }}
+                      >
+                        {item.answer}
+                      </div>
+                    </div>
                   </div>
-                </div>
+                ))}
               </div>
-              <div class="accordion-item">
-                <h2 class="accordion-header">
-                  <button
-                    class="accordion-button collapsed"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#flush-collapseThree"
-                    aria-expanded="false"
-                    aria-controls="flush-collapseThree"
-                  >
-                    Сколько стоит один блок?
-                  </button>
-                </h2>
-                <div
-                  id="flush-collapseThree"
-                  class="accordion-collapse collapse"
-                  data-bs-parent="#accordionFlushExample"
-                >
-                  <div class="accordion-body">
-                    Стоимость одного блока — $100. Вы можете приобрести один или
-                    несколько блоков после завершения бесплатного периода.
+
+              {/* Contact Support Card */}
+              <div className="card border-0 shadow-sm mt-5">
+                <div className="card-body p-4 text-center">
+                  <div className="mb-3">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="48"
+                      height="48"
+                      fill="currentColor"
+                      className="bi bi-question-circle text-success"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                      <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z" />
+                    </svg>
                   </div>
-                </div>
-              </div>
-              <div class="accordion-item">
-                <h2 class="accordion-header">
-                  <button
-                    class="accordion-button collapsed"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#flush-collapseThree"
-                    aria-expanded="false"
-                    aria-controls="flush-collapseThree"
-                  >
-                    Что я получаю после покупки?
-                  </button>
-                </h2>
-                <div
-                  id="flush-collapseThree"
-                  class="accordion-collapse collapse"
-                  data-bs-parent="#accordionFlushExample"
-                >
-                  <div class="accordion-body">
-                    После оплаты ваш баннер появляется на выбранных блоках,
-                    содержит кликабельную ссылку и закрепляется за вами.
-                  </div>
-                </div>
-              </div>
-              <div class="accordion-item">
-                <h2 class="accordion-header">
-                  <button
-                    class="accordion-button collapsed"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#flush-collapseThree"
-                    aria-expanded="false"
-                    aria-controls="flush-collapseThree"
-                  >
-                    Можно ли купить несколько блоков?
-                  </button>
-                </h2>
-                <div
-                  id="flush-collapseThree"
-                  class="accordion-collapse collapse"
-                  data-bs-parent="#accordionFlushExample"
-                >
-                  <div class="accordion-body">
-                    Да. Вы можете выбрать любое количество свободных блоков и
-                    разместить баннер на всей выбранной области.
-                  </div>
-                </div>
-              </div>
-              <div class="accordion-item">
-                <h2 class="accordion-header">
-                  <button
-                    class="accordion-button collapsed"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#flush-collapseThree"
-                    aria-expanded="false"
-                    aria-controls="flush-collapseThree"
-                  >
-                    Как проходит процесс размещения?
-                  </button>
-                </h2>
-                <div
-                  id="flush-collapseThree"
-                  class="accordion-collapse collapse"
-                  data-bs-parent="#accordionFlushExample"
-                >
-                  <div class="accordion-body">
-                    Вы выбираете блоки, заполняете форму в модальном окне,
-                    загружаете баннер. Баннер публикуется сразу или после
-                    короткой модерации.
-                  </div>
-                </div>
-              </div>
-              <div class="accordion-item">
-                <h2 class="accordion-header">
-                  <button
-                    class="accordion-button collapsed"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#flush-collapseThree"
-                    aria-expanded="false"
-                    aria-controls="flush-collapseThree"
-                  >
-                    Какие данные нужно указать?
-                  </button>
-                </h2>
-                <div
-                  id="flush-collapseThree"
-                  class="accordion-collapse collapse"
-                  data-bs-parent="#accordionFlushExample"
-                >
-                  <div class="accordion-body">
-                    Email, название компании или проекта, ссылку на сайт,
-                    краткое описание компании и баннер.
-                  </div>
-                </div>
-              </div>
-              <div class="accordion-item">
-                <h2 class="accordion-header">
-                  <button
-                    class="accordion-button collapsed"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#flush-collapseThree"
-                    aria-expanded="false"
-                    aria-controls="flush-collapseThree"
-                  >
-                    Когда появляется баннер?
-                  </button>
-                </h2>
-                <div
-                  id="flush-collapseThree"
-                  class="accordion-collapse collapse"
-                  data-bs-parent="#accordionFlushExample"
-                >
-                  <div class="accordion-body">
-                    Обычно сразу после отправки формы. В редких случаях может
-                    потребоваться модерация.
-                  </div>
-                </div>
-              </div>
-              <div class="accordion-item">
-                <h2 class="accordion-header">
-                  <button
-                    class="accordion-button collapsed"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#flush-collapseThree"
-                    aria-expanded="false"
-                    aria-controls="flush-collapseThree"
-                  >
-                    Сколько длится бесплатное размещение?
-                  </button>
-                </h2>
-                <div
-                  id="flush-collapseThree"
-                  class="accordion-collapse collapse"
-                  data-bs-parent="#accordionFlushExample"
-                >
-                  <div class="accordion-body">
-                    Бесплатное размещение действует 5 календарных дней с момента
-                    публикации баннера.
-                  </div>
-                </div>
-              </div>
-              <div class="accordion-item">
-                <h2 class="accordion-header">
-                  <button
-                    class="accordion-button collapsed"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#flush-collapseThree"
-                    aria-expanded="false"
-                    aria-controls="flush-collapseThree"
-                  >
-                    Что происходит после 5 дней?
-                  </button>
-                </h2>
-                <div
-                  id="flush-collapseThree"
-                  class="accordion-collapse collapse"
-                  data-bs-parent="#accordionFlushExample"
-                >
-                  <div class="accordion-body">
-                    После окончания бесплатного периода вы можете оплатить блоки
-                    и продолжить размещение. В противном случае баннер будет
-                    скрыт.
-                  </div>
-                </div>
-              </div>
-              <div class="accordion-item">
-                <h2 class="accordion-header">
-                  <button
-                    class="accordion-button collapsed"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#flush-collapseThree"
-                    aria-expanded="false"
-                    aria-controls="flush-collapseThree"
-                  >
-                    Есть ли требования к баннеру?
-                  </button>
-                </h2>
-                <div
-                  id="flush-collapseThree"
-                  class="accordion-collapse collapse"
-                  data-bs-parent="#accordionFlushExample"
-                >
-                  <div class="accordion-body">
-                    Баннер должен соответствовать указанным размерам и не
-                    содержать запрещённого или незаконного контента.
-                  </div>
-                </div>
-              </div>
-              <div class="accordion-item">
-                <h2 class="accordion-header">
-                  <button
-                    class="accordion-button collapsed"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#flush-collapseThree"
-                    aria-expanded="false"
-                    aria-controls="flush-collapseThree"
-                  >
-                    Можно ли изменить баннер или ссылку?
-                  </button>
-                </h2>
-                <div
-                  id="flush-collapseThree"
-                  class="accordion-collapse collapse"
-                  data-bs-parent="#accordionFlushExample"
-                >
-                  <div class="accordion-body">
-                    Да. Для этого свяжитесь с поддержкой, указав email,
-                    использованный при размещении.
-                  </div>
-                </div>
-              </div>
-              <div class="accordion-item">
-                <h2 class="accordion-header">
-                  <button
-                    class="accordion-button collapsed"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#flush-collapseThree"
-                    aria-expanded="false"
-                    aria-controls="flush-collapseThree"
-                  >
-                    Какие способы оплаты доступны?
-                  </button>
-                </h2>
-                <div
-                  id="flush-collapseThree"
-                  class="accordion-collapse collapse"
-                  data-bs-parent="#accordionFlushExample"
-                >
-                  <div class="accordion-body">
-                    Поддерживаются популярные онлайн-способы оплаты. Актуальный
-                    список отображается на этапе оплаты.
-                  </div>
-                </div>
-              </div>
-              <div class="accordion-item">
-                <h2 class="accordion-header">
-                  <button
-                    class="accordion-button collapsed"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#flush-collapseThree"
-                    aria-expanded="false"
-                    aria-controls="flush-collapseThree"
-                  >
-                    Можно ли вернуть деньги?
-                  </button>
-                </h2>
-                <div
-                  id="flush-collapseThree"
-                  class="accordion-collapse collapse"
-                  data-bs-parent="#accordionFlushExample"
-                >
-                  <div class="accordion-body">
-                    Возврат возможен только в случаях, предусмотренных правилами
-                    сайта (например, при технической ошибке).
-                  </div>
-                </div>
-              </div>
-              <div class="accordion-item">
-                <h2 class="accordion-header">
-                  <button
-                    class="accordion-button collapsed"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#flush-collapseThree"
-                    aria-expanded="false"
-                    aria-controls="flush-collapseThree"
-                  >
-                    Как связаться с поддержкой?
-                  </button>
-                </h2>
-                <div
-                  id="flush-collapseThree"
-                  class="accordion-collapse collapse"
-                  data-bs-parent="#accordionFlushExample"
-                >
-                  <div class="accordion-body">
-                    Используйте форму обратной связи или email, указанный в
-                    разделе «Контакты».
+                  <h3 className="h4 fw-bold mb-3">
+                    Не нашли ответ на свой вопрос?
+                  </h3>
+                  <p className="text-muted mb-4">
+                    Наша служба поддержки готова помочь вам в любое время
+                  </p>
+                  <div className="d-flex gap-3 justify-content-center flex-wrap">
+                    <a
+                      href="mailto:support@blockstorm.com"
+                      className="btn btn-success"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                        className="bi bi-envelope me-2"
+                        viewBox="0 0 16 16"
+                      >
+                        <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z" />
+                      </svg>
+                      Написать в поддержку
+                    </a>
+                    <a href="/" className="btn btn-outline-success">
+                      Вернуться на главную
+                    </a>
                   </div>
                 </div>
               </div>
