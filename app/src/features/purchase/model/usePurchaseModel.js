@@ -3,7 +3,7 @@ import { useState } from "react";
 export const usePurchaseModel = () => {
   const [formData, setFormData] = useState({
     buyerEmail: "",
-    buyerName: "",
+    companyName: "",
     websiteUrl: "",
     altText: "",
   });
@@ -35,7 +35,12 @@ export const usePurchaseModel = () => {
   };
 
   const resetForm = () => {
-    setFormData({ buyerEmail: "", buyerName: "", websiteUrl: "", altText: "" });
+    setFormData({
+      buyerEmail: "",
+      companyName: "",
+      websiteUrl: "",
+      altText: "",
+    });
     setUploadedFile(null);
     setPreviewUrl(null);
   };
@@ -43,7 +48,7 @@ export const usePurchaseModel = () => {
   const validateForm = () => {
     return (
       formData.buyerEmail &&
-      formData.buyerName &&
+      formData.companyName &&
       formData.websiteUrl &&
       formData.altText &&
       uploadedFile

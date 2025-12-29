@@ -36,7 +36,9 @@ export const PurchaseModal = ({ isOpen, onClose }) => {
     onClose();
 
     alert(
-      `Purchase request submitted!\n\nBlocks: ${blockCoords}\nTotal: $${formatPrice(
+      `Purchase request submitted!\n\nCompany: ${
+        purchaseData.companyName
+      }\nBlocks: ${blockCoords}\nTotal: $${formatPrice(
         gridModel.selectedCount
       )}`
     );
@@ -78,13 +80,13 @@ export const PurchaseModal = ({ isOpen, onClose }) => {
               />
 
               <Input
-                label="Your Name"
+                label="Company Name"
                 type="text"
-                placeholder="John Doe"
+                placeholder="Your Company Ltd."
                 required
-                value={purchaseModel.formData.buyerName}
+                value={purchaseModel.formData.companyName}
                 onChange={(e) =>
-                  purchaseModel.updateField("buyerName", e.target.value)
+                  purchaseModel.updateField("companyName", e.target.value)
                 }
               />
 

@@ -7,7 +7,7 @@ export const Header = ({ onPurchaseClick }) => {
   const { gridModel } = useApp();
   const navLinks = [
     { label: "Pixels", href: "/" },
-    { label: "List", href: "/list" },
+    { label: "PixelList", href: "/pixel-list" },
     { label: "FAQ", href: "/faq" },
   ];
 
