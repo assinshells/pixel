@@ -68,11 +68,10 @@ export const CanvasGrid = () => {
       ref={canvasRef}
       width={GRID_SIZE}
       height={GRID_SIZE}
-      className="border border-dark shadow bg-white d-block mx-auto"
+      className="d-block mx-auto"
       style={{
         imageRendering: "pixelated",
         cursor: "crosshair",
-        borderWidth: "2px",
       }}
       onClick={handleClick}
     />

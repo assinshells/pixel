@@ -51,18 +51,25 @@ export const Footer = () => {
         { label: "Instagram", href: "#" },
       ],
     },
+    {
+      title: "Language",
+      links: [
+        { label: "English", href: "#" },
+        { label: "Ukrainian", href: "#" },
+      ],
+    },
   ];
 
   return (
-    <footer className="bg-dark text-light py-5 mt-5">
+    <footer className="bg-light ">
       <div className="container">
         <div className="row">
           {/* Brand Section */}
           <div className="col-lg-3 mb-4">
-            <h2 className="fs-3 fw-bold mb-3">Large</h2>
+            <h2 className="fs-3 fw-bold mb-3">BlockStorm</h2>
             <p className="text-muted">
-              The premier platform for pixel-perfect advertising. Own your space
-              on the world's most innovative advertising grid.
+              Buy a block, place your banner, and dominate a tiny piece of the
+              internet.
             </p>
             <div className="mt-3">
               <span className="badge bg-success me-2">

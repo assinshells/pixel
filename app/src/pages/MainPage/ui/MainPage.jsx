@@ -16,17 +16,6 @@ export const MainPage = () => {
         style={{ paddingTop: "20px", paddingBottom: "40px" }}
       >
         <div className="container" style={{ maxWidth: "1200px" }}>
-          <div className="card shadow-sm mb-4">
-            <div className="card-body">
-              <h3 className="card-title mb-2">
-                Advertising Grid - $100 per block
-              </h3>
-              <p className="card-text text-muted mb-0">
-                Click blocks to select, then purchase your advertising space
-              </p>
-            </div>
-          </div>
-
           <CanvasGrid />
         </div>
       </main>
