@@ -1,5 +1,6 @@
 :root {
   --bs-body-bg: #faf9f5;
+  --canvas-bg: #ffffff;
 }
 
 body {
@@ -7,9 +8,6 @@ body {
   min-height: 100vh;
 }
 .navbar-body-bg {
-  background-color: var(--bs-body-bg);
-}
-canvas {
   background-color: var(--bs-body-bg);
 }
 

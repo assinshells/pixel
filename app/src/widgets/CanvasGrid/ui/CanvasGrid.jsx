@@ -20,7 +20,8 @@ export const CanvasGrid = () => {
         const index = getBlockIndex(x, y);
         const state = gridModel.blocks[index];
 
-        ctx.fillStyle = state === 2 ? "#fff" : state === 1 ? "#81c784" : "#eee";
+        ctx.fillStyle =
+          state === 2 ? "#fff" : state === 1 ? "#81c784" : "#f8f8f8";
         ctx.fillRect(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
         ctx.strokeStyle = "#ccc";
         ctx.lineWidth = 0.5;
