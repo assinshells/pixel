@@ -70,63 +70,6 @@ export const Footer = () => {
   return (
     <footer className="bg-light">
       <div className="container">
-        {/*<div className="row">
-          {/* Brand Section */}
-        {/*<div className="col-lg-3 mb-4">
-            <h2 className="fs-3 fw-bold mb-3">BlockStorm</h2>
-            <p className="text-muted">
-              Buy a block, place your banner, and dominate a tiny piece of the
-              internet.
-            </p>
-            <div className="mt-3">
-              <span className="badge bg-success me-2">
-                {totalBlocks.toLocaleString()} Total Blocks
-              </span>
-              <span className="badge bg-info">${BLOCK_PRICE} per block</span>
-            </div>
-            <div className="mt-3">
-              <div className="d-flex justify-content-between align-items-center mb-1">
-                <small className="text-muted">Grid Occupancy</small>
-                <small className="text-success fw-semibold">
-                  {purchasedPercentage}%
-                </small>
-              </div>
-              <div className="progress" style={{ height: "8px" }}>
-                <div
-                  className="progress-bar bg-success"
-                  role="progressbar"
-                  style={{ width: `${purchasedPercentage}%` }}
-                  aria-valuenow={purchasedPercentage}
-                  aria-valuemin="0"
-                  aria-valuemax="100"
-                ></div>
-              </div>
-            </div>
-          </div>
-
-          {/* Footer Links */}
-        {/*{footerSections.map((section, index) => (
-            <div key={index} className="col-lg-2 col-md-3 col-sm-6 mb-4">
-              <h5 className="fw-semibold mb-3">{section.title}</h5>
-              <ul className="list-unstyled">
-                {section.links.map((link, linkIndex) => (
-                  <li key={linkIndex} className="mb-2">
-                    <a
-                      href={link.href}
-                      className="text-muted text-decoration-none hover-link"
-                      style={{ fontSize: "0.9rem" }}
-                    >
-                      {link.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-
-        <hr className="border-secondary my-4" />*/}
-
         {/* Bottom Footer */}
         <div className="row align-items-center">
           <div className="col-md-6 text-center text-md-start mb-3 mb-md-0">
@@ -134,43 +77,6 @@ export const Footer = () => {
               © {currentYear} BlockStorm. All rights reserved.
             </p>
           </div>
-
-          {/*<div className="col-md-6 text-center text-md-end">
-            <div className="d-inline-flex gap-3">
-              <a
-                href="#"
-                className="text-muted hover-link"
-                style={{ fontSize: "1.5rem" }}
-                aria-label="Twitter"
-              >
-                𝕏
-              </a>
-              <a
-                href="#"
-                className="text-muted hover-link"
-                style={{ fontSize: "1.5rem" }}
-                aria-label="Facebook"
-              >
-                ⓕ
-              </a>
-              <a
-                href="#"
-                className="text-muted hover-link"
-                style={{ fontSize: "1.5rem" }}
-                aria-label="LinkedIn"
-              >
-                in
-              </a>
-              <a
-                href="#"
-                className="text-muted hover-link"
-                style={{ fontSize: "1.5rem" }}
-                aria-label="Instagram"
-              >
-                📷
-              </a>
-            </div>
-          </div>*/}
         </div>
 
         {/* Enhanced Stats Bar */}

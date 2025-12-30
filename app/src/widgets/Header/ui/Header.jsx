@@ -1,17 +1,25 @@
 // src/widgets/Header/ui/Header.jsx
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useApp } from "@/app/providers/AppProvider";
 import { formatPrice } from "@/shared/lib/format";
 
 export const Header = ({ onPurchaseClick }) => {
   const { gridModel } = useApp();
+  const location = useLocation();
 
   const navLinks = [
     { label: "Homepage", href: "/" },
-    { label: "PixelList", href: "/pixel-list" },
+    { label: "Pixel list", href: "/pixel-list" },
     { label: "FAQ", href: "/faq" },
   ];
+
+  const isActive = (href) => {
+    if (href === "/") {
+      return location.pathname === "/";
+    }
+    return location.pathname === href;
+  };
 
   return (
     <nav className="navbar navbar-expand-md sticky-top navbar-body-bg">
@@ -76,7 +84,14 @@ export const Header = ({ onPurchaseClick }) => {
               {navLinks.map((link) => (
                 <li key={link.label} className="nav-item">
                   {link.href.startsWith("/") ? (
-                    <Link className="nav-link" to={link.href}>
+                    <Link
+                      className={`nav-link ${
+                        isActive(link.href)
+                          ? "active fw-semibold text-success"
+                          : ""
+                      }`}
+                      to={link.href}
+                    >
                       {link.label}
                     </Link>
                   ) : (

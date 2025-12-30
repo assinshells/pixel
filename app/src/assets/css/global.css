@@ -11,22 +11,29 @@ body {
   background-color: var(--bs-body-bg);
 }
 
-/* Footer hover effects */
-.hover-link {
+/* Active navigation link styles */
+.nav-link.active {
+  color: #198754 !important;
+  font-weight: 600;
+  position: relative;
+}
+
+.nav-link.active::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70%;
+  height: 2px;
+  background-color: #198754;
+  border-radius: 2px;
+}
+
+/* Hover effect for nav links */
+.nav-link:not(.active):hover {
+  color: #198754 !important;
   transition: color 0.2s ease;
-}
-
-.hover-link:hover {
-  color: #198754 !important;
-}
-
-footer a {
-  transition: all 0.2s ease;
-}
-
-footer a:hover {
-  transform: translateY(-2px);
-  color: #198754 !important;
 }
 
 /* Smooth scroll */
