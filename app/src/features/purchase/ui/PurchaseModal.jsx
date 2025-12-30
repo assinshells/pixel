@@ -1,21 +1,20 @@
+// src/features/purchase/ui/PurchaseModal.jsx
 import React from "react";
 import { Button } from "@/shared/ui/Button/Button";
 import { Input } from "@/shared/ui/Input/Input";
 import { FileUpload } from "./FileUpload";
 import { useApp } from "@/app/providers/AppProvider";
-import { useLanguage } from "@/app/providers/LanguageProvider";
 import { formatBlockCoordinates, formatPrice } from "@/shared/lib/format";
 import { BLOCK_PRICE } from "@/shared/config/constants";
 
 export const PurchaseModal = ({ isOpen, onClose }) => {
   const { gridModel, purchaseModel } = useApp();
-  const { t } = useLanguage();
 
   if (!isOpen) return null;
 
   const handleConfirm = () => {
     if (!purchaseModel.validateForm()) {
-      alert(t("purchase.fillAllFields"));
+      alert("Please fill in all required fields and upload a banner image");
       return;
     }
 
@@ -37,12 +36,13 @@ export const PurchaseModal = ({ isOpen, onClose }) => {
     purchaseModel.resetForm();
     onClose();
 
-    const message = t("purchase.successMessage")
-      .replace("{company}", purchaseData.companyName)
-      .replace("{blocks}", blockCoords)
-      .replace("{total}", formatPrice(gridModel.selectedCount));
-
-    alert(`${t("purchase.successTitle")}\n\n${message}`);
+    alert(
+      `Purchase request submitted!\n\nCompany: ${
+        purchaseData.companyName
+      }\nBlocks: ${blockCoords}\nTotal: $${formatPrice(
+        gridModel.selectedCount
+      )}`
+    );
   };
 
   const blockCoords = formatBlockCoordinates(gridModel.selectedBlocks);
@@ -60,7 +60,7 @@ export const PurchaseModal = ({ isOpen, onClose }) => {
         >
           <div className="modal-content">
             <div className="modal-header">
-              <h5 className="modal-title">{t("purchase.modalTitle")}</h5>
+              <h5 className="modal-title">Complete Your Purchase</h5>
               <button
                 type="button"
                 className="btn-close"
@@ -70,9 +70,9 @@ export const PurchaseModal = ({ isOpen, onClose }) => {
 
             <div className="modal-body">
               <Input
-                label={t("purchase.yourEmail")}
+                label="Your Email"
                 type="email"
-                placeholder={t("purchase.emailPlaceholder")}
+                placeholder="your@email.com"
                 required
                 value={purchaseModel.formData.buyerEmail}
                 onChange={(e) =>
@@ -81,9 +81,9 @@ export const PurchaseModal = ({ isOpen, onClose }) => {
               />
 
               <Input
-                label={t("purchase.companyName")}
+                label="Company Name"
                 type="text"
-                placeholder={t("purchase.companyPlaceholder")}
+                placeholder="Your Company Ltd."
                 required
                 value={purchaseModel.formData.companyName}
                 onChange={(e) =>
@@ -92,9 +92,9 @@ export const PurchaseModal = ({ isOpen, onClose }) => {
               />
 
               <Input
-                label={t("purchase.websiteUrl")}
+                label="Target Website URL"
                 type="url"
-                placeholder={t("purchase.websitePlaceholder")}
+                placeholder="https://yourwebsite.com"
                 required
                 value={purchaseModel.formData.websiteUrl}
                 onChange={(e) =>
@@ -103,9 +103,9 @@ export const PurchaseModal = ({ isOpen, onClose }) => {
               />
 
               <Input
-                label={t("purchase.altText")}
+                label="Alt Text / Description"
                 type="text"
-                placeholder={t("purchase.altPlaceholder")}
+                placeholder="Your advertisement description"
                 required
                 value={purchaseModel.formData.altText}
                 onChange={(e) =>
@@ -121,26 +121,26 @@ export const PurchaseModal = ({ isOpen, onClose }) => {
               />
 
               <div className="alert alert-info">
-                <strong>{t("purchase.purchaseSummary")}</strong>
+                <strong>Purchase Summary:</strong>
                 <br />
-                {t("purchase.blocks")} {gridModel.selectedCount}
+                Blocks: {gridModel.selectedCount}
                 <br />
-                {t("purchase.coordinates")} {blockCoords}
+                Block Coordinates: {blockCoords}
                 <br />
-                {t("purchase.total")} ${formatPrice(gridModel.selectedCount)}
+                Total: ${formatPrice(gridModel.selectedCount)}
                 <br />
                 <small className="text-muted">
-                  {t("purchase.summaryNote")}
+                  Your purchase request will be sent to the seller for approval
                 </small>
               </div>
             </div>
 
             <div className="modal-footer">
               <Button variant="secondary" onClick={onClose}>
-                {t("common.cancel")}
+                Cancel
               </Button>
               <Button variant="primary" onClick={handleConfirm}>
-                {t("purchase.submitButton")}
+                Submit Purchase Request
               </Button>
             </div>
           </div>

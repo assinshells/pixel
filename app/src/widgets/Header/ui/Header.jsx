@@ -1,22 +1,16 @@
+// src/widgets/Header/ui/Header.jsx
 import React from "react";
 import { Link } from "react-router-dom";
 import { useApp } from "@/app/providers/AppProvider";
-import { useLanguage } from "@/app/providers/LanguageProvider";
 import { formatPrice } from "@/shared/lib/format";
 
 export const Header = ({ onPurchaseClick }) => {
   const { gridModel } = useApp();
-  const { t, language, setLanguage } = useLanguage();
 
   const navLinks = [
-    { label: t("nav.pixels"), href: "/" },
-    { label: t("nav.pixelList"), href: "/pixel-list" },
-    { label: t("nav.faq"), href: "/faq" },
-  ];
-
-  const languages = [
-    { code: "en", flag: "🇬🇧" },
-    { code: "uk", flag: "🇺🇦" },
+    { label: "Homepage", href: "/" },
+    { label: "PixelList", href: "/pixel-list" },
+    { label: "FAQ", href: "/faq" },
   ];
 
   return (
@@ -28,7 +22,7 @@ export const Header = ({ onPurchaseClick }) => {
             className="small fst-italic text-muted d-block"
             style={{ lineHeight: "1" }}
           >
-            {t("nav.tagline")}
+            Claim Your Corner of the Web
           </span>
         </Link>
 
@@ -75,7 +69,7 @@ export const Header = ({ onPurchaseClick }) => {
                   className="small fst-italic text-muted d-block"
                   style={{ lineHeight: "1" }}
                 >
-                  {t("nav.tagline")}
+                  Claim Your Corner of the Web
                 </span>
               </li>
 
@@ -93,38 +87,6 @@ export const Header = ({ onPurchaseClick }) => {
                 </li>
               ))}
 
-              {/* Language Switcher */}
-              <li className="nav-item">
-                <div className="d-flex gap-1">
-                  {languages.map((lang) => (
-                    <button
-                      key={lang.code}
-                      onClick={() => setLanguage(lang.code)}
-                      className={`btn btn-sm ${
-                        language === lang.code
-                          ? "btn-success"
-                          : "btn-outline-secondary"
-                      }`}
-                      style={{
-                        width: "45px",
-                        height: "35px",
-                        padding: "0",
-                        fontSize: "1.2rem",
-                        transition: "all 0.2s ease",
-                        border:
-                          language === lang.code
-                            ? "2px solid #198754"
-                            : "1px solid #dee2e6",
-                      }}
-                      title={lang.code === "en" ? "English" : "Українська"}
-                    >
-                      {lang.flag}
-                    </button>
-                  ))}
-                </div>
-              </li>
-
-              {/* Cart */}
               <li className="nav-item">
                 <button
                   className="nav-link btn btn-link position-relative"

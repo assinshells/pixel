@@ -1,55 +1,68 @@
+// src/widgets/Footer/ui/Footer.jsx
 import React from "react";
-import { BLOCKS } from "@/shared/config/constants";
+import { BLOCKS, BLOCK_PRICE } from "@/shared/config/constants";
 import { useApp } from "@/app/providers/AppProvider";
-import { useLanguage } from "@/app/providers/LanguageProvider";
 
 export const Footer = () => {
-  const { gridModel } = useApp();
-  const { t } = useLanguage();
+  const { gridModel, adsModel } = useApp();
   const currentYear = new Date().getFullYear();
 
+  // Total blocks in the grid
   const totalBlocks = BLOCKS * BLOCKS;
-  const purchasedCount = Array.from(gridModel.blocks).filter(
-    (block) => block === 2
-  ).length;
+
+  // Count purchased blocks from ads
+  const purchasedCount = adsModel.purchasedAds.reduce(
+    (sum, ad) => sum + ad.blocks.length,
+    0
+  );
+
+  // Calculate available blocks
   const availableBlocks = totalBlocks - purchasedCount;
+
+  // Calculate percentage
   const purchasedPercentage = ((purchasedCount / totalBlocks) * 100).toFixed(1);
+
+  // Calculate revenue from sold blocks
+  const totalRevenue = purchasedCount * BLOCK_PRICE;
+
+  // Calculate maximum potential revenue
+  const maxPotentialRevenue = totalBlocks * BLOCK_PRICE;
 
   const footerSections = [
     {
-      title: t("footer.about"),
+      title: "About",
       links: [
-        { label: t("footer.aboutUs"), href: "#" },
-        { label: t("footer.contact"), href: "#" },
-        { label: t("footer.careers"), href: "#" },
-        { label: t("footer.advertise"), href: "#" },
+        { label: "About Us", href: "#" },
+        { label: "Contact", href: "#" },
+        { label: "Careers", href: "#" },
+        { label: "Advertise", href: "#" },
       ],
     },
     {
-      title: t("footer.services"),
+      title: "Services",
       links: [
-        { label: t("footer.buySpace"), href: "#" },
-        { label: t("footer.pricing"), href: "#" },
-        { label: t("footer.howItWorks"), href: "#" },
-        { label: t("nav.faq"), href: "/faq" },
+        { label: "Buy Advertising Space", href: "#" },
+        { label: "Pricing", href: "#" },
+        { label: "How It Works", href: "#" },
+        { label: "FAQ", href: "/faq" },
       ],
     },
     {
-      title: t("footer.legal"),
+      title: "Legal",
       links: [
-        { label: t("footer.terms"), href: "#" },
-        { label: t("footer.privacy"), href: "#" },
-        { label: t("footer.cookies"), href: "#" },
-        { label: t("footer.disclaimer"), href: "#" },
+        { label: "Terms of Service", href: "#" },
+        { label: "Privacy Policy", href: "#" },
+        { label: "Cookie Policy", href: "#" },
+        { label: "Disclaimer", href: "#" },
       ],
     },
     {
-      title: t("footer.connect"),
+      title: "Connect",
       links: [
-        { label: t("footer.twitter"), href: "#" },
-        { label: t("footer.facebook"), href: "#" },
-        { label: t("footer.linkedin"), href: "#" },
-        { label: t("footer.instagram"), href: "#" },
+        { label: "Twitter", href: "#" },
+        { label: "Facebook", href: "#" },
+        { label: "LinkedIn", href: "#" },
+        { label: "Instagram", href: "#" },
       ],
     },
   ];
@@ -57,22 +70,23 @@ export const Footer = () => {
   return (
     <footer className="bg-light">
       <div className="container">
-        <div className="row">
+        {/*<div className="row">
           {/* Brand Section */}
-          <div className="col-lg-3 mb-4">
+        {/*<div className="col-lg-3 mb-4">
             <h2 className="fs-3 fw-bold mb-3">BlockStorm</h2>
-            <p className="text-muted">{t("footer.description")}</p>
+            <p className="text-muted">
+              Buy a block, place your banner, and dominate a tiny piece of the
+              internet.
+            </p>
             <div className="mt-3">
               <span className="badge bg-success me-2">
-                {totalBlocks.toLocaleString()} {t("footer.totalBlocks")}
+                {totalBlocks.toLocaleString()} Total Blocks
               </span>
-              <span className="badge bg-info">$100 {t("footer.perBlock")}</span>
+              <span className="badge bg-info">${BLOCK_PRICE} per block</span>
             </div>
             <div className="mt-3">
               <div className="d-flex justify-content-between align-items-center mb-1">
-                <small className="text-muted">
-                  {t("footer.gridOccupancy")}
-                </small>
+                <small className="text-muted">Grid Occupancy</small>
                 <small className="text-success fw-semibold">
                   {purchasedPercentage}%
                 </small>
@@ -91,7 +105,7 @@ export const Footer = () => {
           </div>
 
           {/* Footer Links */}
-          {footerSections.map((section, index) => (
+        {/*{footerSections.map((section, index) => (
             <div key={index} className="col-lg-2 col-md-3 col-sm-6 mb-4">
               <h5 className="fw-semibold mb-3">{section.title}</h5>
               <ul className="list-unstyled">
@@ -109,40 +123,19 @@ export const Footer = () => {
               </ul>
             </div>
           ))}
-
-          {/* Newsletter Section */}
-          <div className="col-lg-3 mb-4">
-            <h5 className="fw-semibold mb-3">{t("footer.stayUpdated")}</h5>
-            <p className="text-muted" style={{ fontSize: "0.9rem" }}>
-              {t("footer.newsletterText")}
-            </p>
-            <form className="mt-3">
-              <div className="input-group">
-                <input
-                  type="email"
-                  className="form-control"
-                  placeholder={t("footer.emailPlaceholder")}
-                  aria-label="Email"
-                />
-                <button className="btn btn-success" type="submit">
-                  {t("footer.subscribe")}
-                </button>
-              </div>
-            </form>
-          </div>
         </div>
 
-        <hr className="border-secondary my-4" />
+        <hr className="border-secondary my-4" />*/}
 
         {/* Bottom Footer */}
         <div className="row align-items-center">
           <div className="col-md-6 text-center text-md-start mb-3 mb-md-0">
             <p className="text-muted mb-0" style={{ fontSize: "0.9rem" }}>
-              © {currentYear} BlockStorm. {t("footer.allRights")}
+              © {currentYear} BlockStorm. All rights reserved.
             </p>
           </div>
 
-          <div className="col-md-6 text-center text-md-end">
+          {/*<div className="col-md-6 text-center text-md-end">
             <div className="d-inline-flex gap-3">
               <a
                 href="#"
@@ -177,7 +170,7 @@ export const Footer = () => {
                 📷
               </a>
             </div>
-          </div>
+          </div>*/}
         </div>
 
         {/* Enhanced Stats Bar */}
@@ -189,41 +182,40 @@ export const Footer = () => {
                   <div className="text-success fw-bold fs-4">
                     {totalBlocks.toLocaleString()}
                   </div>
-                  <div className="text-muted small">
-                    {t("footer.totalBlocks")}
-                  </div>
+                  <div className="text-muted small">Total Blocks</div>
                 </div>
                 <div className="col-lg-2 col-md-4 col-6">
                   <div className="text-warning fw-bold fs-4">
                     {purchasedCount.toLocaleString()}
                   </div>
-                  <div className="text-muted small">{t("footer.sold")}</div>
+                  <div className="text-muted small">Sold</div>
                 </div>
                 <div className="col-lg-2 col-md-4 col-6">
                   <div className="text-info fw-bold fs-4">
                     {availableBlocks.toLocaleString()}
                   </div>
-                  <div className="text-muted small">
-                    {t("footer.available")}
-                  </div>
-                </div>
-                <div className="col-lg-2 col-md-4 col-6">
-                  <div className="text-success fw-bold fs-4">$100</div>
-                  <div className="text-muted small">{t("footer.perBlock")}</div>
+                  <div className="text-muted small">Available</div>
                 </div>
                 <div className="col-lg-2 col-md-4 col-6">
                   <div className="text-success fw-bold fs-4">
-                    ${((purchasedCount * 100) / 1000).toFixed(0)}K
+                    ${BLOCK_PRICE}
                   </div>
-                  <div className="text-muted small">{t("footer.revenue")}</div>
+                  <div className="text-muted small">Per Block</div>
                 </div>
                 <div className="col-lg-2 col-md-4 col-6">
                   <div className="text-success fw-bold fs-4">
-                    ${((totalBlocks * 100) / 1000000).toFixed(1)}M
+                    $
+                    {totalRevenue >= 1000
+                      ? `${(totalRevenue / 1000).toFixed(1)}K`
+                      : totalRevenue.toLocaleString()}
                   </div>
-                  <div className="text-muted small">
-                    {t("footer.maxPotential")}
+                  <div className="text-muted small">Revenue</div>
+                </div>
+                <div className="col-lg-2 col-md-4 col-6">
+                  <div className="text-success fw-bold fs-4">
+                    ${(maxPotentialRevenue / 1000000).toFixed(1)}M
                   </div>
+                  <div className="text-muted small">Max Potential</div>
                 </div>
               </div>
             </div>
