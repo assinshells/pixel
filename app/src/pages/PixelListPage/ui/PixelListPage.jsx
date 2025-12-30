@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useApp } from "@/app/providers/AppProvider";
+import { useLanguage } from "@/app/providers/LanguageProvider";
 import { Header } from "@/widgets/Header/ui/Header";
 import { Footer } from "@/widgets/Footer/ui/Footer";
 import { PurchaseModal } from "@/features/purchase/ui/PurchaseModal";
@@ -8,6 +9,7 @@ import { BLOCK_PRICE } from "@/shared/config/constants";
 export const PixelListPage = () => {
   const [showModal, setShowModal] = useState(false);
   const { adsModel } = useApp();
+  const { t } = useLanguage();
 
   return (
     <div className="d-flex flex-column min-vh-100">
@@ -19,10 +21,12 @@ export const PixelListPage = () => {
             <div className="col-lg-10">
               <div className="card shadow-sm">
                 <div className="card-header bg-success text-white">
-                  <h3 className="mb-0">Purchased Advertising Blocks</h3>
+                  <h3 className="mb-0">{t("pixelList.title")}</h3>
                   <p className="mb-0 small">
-                    Currently displaying {adsModel.purchasedAds.length} active
-                    advertisement(s)
+                    {t("pixelList.subtitle").replace(
+                      "{count}",
+                      adsModel.purchasedAds.length
+                    )}
                   </p>
                 </div>
 
@@ -39,8 +43,8 @@ export const PixelListPage = () => {
                       >
                         <path d="M4.98 4a.5.5 0 0 0-.39.188L1.54 8H6a.5.5 0 0 1 .5.5 1.5 1.5 0 1 0 3 0A.5.5 0 0 1 10 8h4.46l-3.05-3.812A.5.5 0 0 0 11.02 4H4.98zm9.954 5H10.45a2.5 2.5 0 0 1-4.9 0H1.066l.32 2.562a.5.5 0 0 0 .497.438h12.234a.5.5 0 0 0 .496-.438L14.933 9zM3.809 3.563A1.5 1.5 0 0 1 4.981 3h6.038a1.5 1.5 0 0 1 1.172.563l3.7 4.625a.5.5 0 0 1 .105.374l-.39 3.124A1.5 1.5 0 0 1 14.117 13H1.883a1.5 1.5 0 0 1-1.489-1.314l-.39-3.124a.5.5 0 0 1 .106-.374l3.7-4.625z" />
                       </svg>
-                      <h5>No advertisements yet</h5>
-                      <p>Be the first to purchase advertising space!</p>
+                      <h5>{t("pixelList.emptyTitle")}</h5>
+                      <p>{t("pixelList.emptyText")}</p>
                     </div>
                   ) : (
                     <div className="table-responsive">
@@ -50,14 +54,14 @@ export const PixelListPage = () => {
                             <th scope="col" style={{ width: "60px" }}>
                               #
                             </th>
-                            <th scope="col">Company</th>
-                            <th scope="col">Website</th>
-                            <th scope="col">Description</th>
+                            <th scope="col">{t("pixelList.company")}</th>
+                            <th scope="col">{t("pixelList.website")}</th>
+                            <th scope="col">{t("pixelList.description")}</th>
                             <th scope="col" style={{ width: "100px" }}>
-                              Size
+                              {t("pixelList.size")}
                             </th>
                             <th scope="col" style={{ width: "120px" }}>
-                              Value
+                              {t("pixelList.value")}
                             </th>
                           </tr>
                         </thead>
@@ -67,7 +71,8 @@ export const PixelListPage = () => {
                               <th scope="row">{index + 1}</th>
                               <td>
                                 <strong>
-                                  {ad.companyName || "Unknown Company"}
+                                  {ad.companyName ||
+                                    t("pixelList.unknownCompany")}
                                 </strong>
                               </td>
                               <td>
@@ -108,8 +113,10 @@ export const PixelListPage = () => {
                               </td>
                               <td>
                                 <span className="badge bg-info">
-                                  {ad.blocks.length} block
-                                  {ad.blocks.length !== 1 ? "s" : ""}
+                                  {ad.blocks.length}{" "}
+                                  {ad.blocks.length !== 1
+                                    ? t("pixelList.blocksPlural")
+                                    : t("pixelList.blocks")}
                                 </span>
                               </td>
                               <td>
@@ -126,7 +133,7 @@ export const PixelListPage = () => {
                         <tfoot className="table-light">
                           <tr>
                             <td colSpan="4" className="text-end fw-bold">
-                              Total:
+                              {t("pixelList.total")}
                             </td>
                             <td>
                               <span className="badge bg-primary">
@@ -134,7 +141,7 @@ export const PixelListPage = () => {
                                   (sum, ad) => sum + ad.blocks.length,
                                   0
                                 )}{" "}
-                                blocks
+                                {t("pixelList.blocksPlural")}
                               </span>
                             </td>
                             <td>
@@ -170,14 +177,9 @@ export const PixelListPage = () => {
                     <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
                     <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
                   </svg>
-                  Understanding Block Coordinates
+                  {t("pixelList.infoTitle")}
                 </h5>
-                <p className="mb-0">
-                  Block coordinates are displayed in <strong>Y.X</strong>{" "}
-                  format. For example, <code>5.10</code> means row 5, column 10.
-                  Range notation like <code>10.10 - 14.14</code> indicates a
-                  rectangular area from top-left to bottom-right corner.
-                </p>
+                <p className="mb-0">{t("pixelList.infoText")}</p>
               </div>
             </div>
           </div>

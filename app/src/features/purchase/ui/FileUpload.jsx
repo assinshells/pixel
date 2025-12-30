@@ -1,7 +1,10 @@
 import React from "react";
 import { Button } from "@/shared/ui/Button/Button";
+import { useLanguage } from "@/app/providers/LanguageProvider";
 
 export const FileUpload = ({ file, previewUrl, onFileSelect, onRemove }) => {
+  const { t } = useLanguage();
+
   const handleDrop = (e) => {
     e.preventDefault();
     const droppedFile = e.dataTransfer.files[0];
@@ -13,7 +16,7 @@ export const FileUpload = ({ file, previewUrl, onFileSelect, onRemove }) => {
   return (
     <div className="mb-3">
       <label className="form-label fw-semibold">
-        Upload Banner Image <span className="text-danger">*</span>
+        {t("purchase.uploadBanner")} <span className="text-danger">*</span>
       </label>
       <div
         className="border border-2 border-dashed rounded p-4 text-center"
@@ -51,8 +54,8 @@ export const FileUpload = ({ file, previewUrl, onFileSelect, onRemove }) => {
             <div style={{ fontSize: "48px" }} className="text-secondary mb-2">
               ☁️
             </div>
-            <p className="mb-1">Click to upload or drag and drop</p>
-            <small className="text-muted">PNG, JPG, GIF (max 5MB)</small>
+            <p className="mb-1">{t("purchase.clickUpload")}</p>
+            <small className="text-muted">{t("purchase.fileTypes")}</small>
           </>
         ) : (
           <div>
@@ -71,7 +74,7 @@ export const FileUpload = ({ file, previewUrl, onFileSelect, onRemove }) => {
                 onRemove();
               }}
             >
-              Remove
+              {t("purchase.remove")}
             </Button>
           </div>
         )}

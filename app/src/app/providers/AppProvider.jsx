@@ -2,10 +2,11 @@ import React, { createContext, useContext, useEffect } from "react";
 import { useGridModel } from "@/entities/grid/model/useGridModel";
 import { useAdsModel } from "@/entities/ad/model/useAdsModel";
 import { usePurchaseModel } from "@/features/purchase/model/usePurchaseModel";
+import { LanguageProvider } from "./LanguageProvider";
 
 export const AppContext = createContext(null);
 
-export const AppProvider = ({ children }) => {
+const AppProviderInner = ({ children }) => {
   const gridModel = useGridModel();
   const adsModel = useAdsModel();
   const purchaseModel = usePurchaseModel();
@@ -24,6 +25,14 @@ export const AppProvider = ({ children }) => {
     <AppContext.Provider value={{ gridModel, adsModel, purchaseModel }}>
       {children}
     </AppContext.Provider>
+  );
+};
+
+export const AppProvider = ({ children }) => {
+  return (
+    <LanguageProvider>
+      <AppProviderInner>{children}</AppProviderInner>
+    </LanguageProvider>
   );
 };
 
