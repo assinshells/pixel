@@ -1,11 +1,15 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { useApp } from "@/app/providers/AppProvider";
 import { GRID_SIZE, BLOCKS, BLOCK_SIZE } from "@/shared/config/constants";
 import { getBlockIndex } from "@/shared/lib/grid";
+import { Tooltip } from "@/shared/ui/Tooltip/Tooltip";
+import { AdPopover } from "@/widgets/AdPopover/ui/AdPopover";
 
 export const CanvasGrid = () => {
   const canvasRef = useRef(null);
   const { gridModel, adsModel } = useApp();
+  const [tooltip, setTooltip] = useState({ content: null, position: null });
+  const [popover, setPopover] = useState({ ad: null, position: null });
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -49,6 +53,37 @@ export const CanvasGrid = () => {
     });
   }, [gridModel.blocks, adsModel.purchasedAds]);
 
+  const handleMouseMove = (e) => {
+    const canvas = canvasRef.current;
+    const rect = canvas.getBoundingClientRect();
+    const x = Math.floor((e.clientX - rect.left) / BLOCK_SIZE);
+    const y = Math.floor((e.clientY - rect.top) / BLOCK_SIZE);
+
+    const ad = adsModel.getAdAtPosition(x, y);
+
+    if (ad) {
+      // Show ad info tooltip
+      const content = `${ad.companyName}\n${ad.altText}`;
+      setTooltip({
+        content,
+        position: { x: e.clientX + 15, y: e.clientY + 15 },
+      });
+    } else if (gridModel.blocks[getBlockIndex(x, y)] === 0) {
+      // Show coordinates for free blocks
+      const content = `Block: ${y + 1}.${x + 1}\nClick to select`;
+      setTooltip({
+        content,
+        position: { x: e.clientX + 15, y: e.clientY + 15 },
+      });
+    } else {
+      setTooltip({ content: null, position: null });
+    }
+  };
+
+  const handleMouseLeave = () => {
+    setTooltip({ content: null, position: null });
+  };
+
   const handleClick = (e) => {
     const canvas = canvasRef.current;
     const rect = canvas.getBoundingClientRect();
@@ -56,25 +91,43 @@ export const CanvasGrid = () => {
     const y = Math.floor((e.clientY - rect.top) / BLOCK_SIZE);
 
     const ad = adsModel.getAdAtPosition(x, y);
-    if (ad) {
-      window.open(ad.websiteUrl, "_blank");
-      return;
-    }
 
-    gridModel.toggleBlock(x, y);
+    if (ad) {
+      // Show popover for purchased blocks
+      const popoverX = Math.min(e.clientX + 15, window.innerWidth - 420);
+      const popoverY = Math.min(e.clientY + 15, window.innerHeight - 400);
+
+      setPopover({
+        ad,
+        position: { x: popoverX, y: popoverY },
+      });
+    } else {
+      // Toggle block selection
+      gridModel.toggleBlock(x, y);
+    }
   };
 
   return (
-    <canvas
-      ref={canvasRef}
-      width={GRID_SIZE}
-      height={GRID_SIZE}
-      className="d-block mx-auto"
-      style={{
-        imageRendering: "pixelated",
-        cursor: "crosshair",
-      }}
-      onClick={handleClick}
-    />
+    <>
+      <canvas
+        ref={canvasRef}
+        width={GRID_SIZE}
+        height={GRID_SIZE}
+        className="d-block mx-auto"
+        style={{
+          imageRendering: "pixelated",
+          cursor: "crosshair",
+        }}
+        onClick={handleClick}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+      />
+      <Tooltip content={tooltip.content} position={tooltip.position} />
+      <AdPopover
+        ad={popover.ad}
+        position={popover.position}
+        onClose={() => setPopover({ ad: null, position: null })}
+      />
+    </>
   );
 };
