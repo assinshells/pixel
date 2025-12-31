@@ -100,79 +100,61 @@ export const FaqPage = () => {
     <div className="d-flex flex-column min-vh-100">
       <Header onPurchaseClick={() => setShowModal(true)} />
 
-      <main className="flex-grow-1 py-5" style={{ backgroundColor: "#f8f9fa" }}>
+      <main className="flex-grow-1">
         <div className="container">
-          <div className="row justify-content-center">
-            <div className="col-lg-10">
-              <div className="text-center mb-5">
-                <h1 className="display-4 fw-bold mb-3">
-                  Frequently Asked Questions
-                </h1>
-                <p className="lead text-muted">
-                  Everything you need to know about advertising on BlockStorm
-                </p>
-              </div>
+          <div className="page-header">
+            <h1 className="page-title">Frequently Asked Questions</h1>
+            <p className="page-subtitle">
+              Everything you need to know about advertising on BlockStorm
+            </p>
+          </div>
 
-              <div className="accordion" id="faqAccordion">
-                {faqData.map((item, index) => (
-                  <div
-                    className="accordion-item border-0 shadow-sm mb-3"
-                    key={index}
+          <div className="unified-accordion accordion" id="faqAccordion">
+            {faqData.map((item, index) => (
+              <div className="accordion-item" key={index}>
+                <h2 className="accordion-header">
+                  <button
+                    className="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target={`#collapse${index}`}
+                    aria-expanded="false"
+                    aria-controls={`collapse${index}`}
                   >
-                    <h2 className="accordion-header">
-                      <button
-                        className="accordion-button collapsed fw-semibold"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target={`#collapse${index}`}
-                        aria-expanded="false"
-                        aria-controls={`collapse${index}`}
-                        style={{
-                          backgroundColor: "#fff",
-                          fontSize: "1.1rem",
-                        }}
-                      >
-                        <span className="text-success me-2">Q{index + 1}.</span>
-                        {item.question}
-                      </button>
-                    </h2>
-                    <div
-                      id={`collapse${index}`}
-                      className="accordion-collapse collapse"
-                      data-bs-parent="#faqAccordion"
-                    >
-                      <div
-                        className="accordion-body"
-                        style={{
-                          fontSize: "1rem",
-                          lineHeight: "1.7",
-                        }}
-                      >
-                        {item.answer}
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              {/* Contact Support Card */}
-              <div className="card border-0 shadow-sm mt-5">
-                <div className="card-body p-4 text-center">
-                  <h3 className="h4 fw-bold mb-3">
-                    Didn't find the answer to your question?
-                  </h3>
-                  <p className="text-muted mb-4">
-                    Our support team is ready to help you anytime
-                  </p>
-                  <div className="d-flex gap-3 justify-content-center flex-wrap">
-                    <a
-                      href="mailto:support@blockstorm.com"
-                      className="btn btn-success"
-                    >
-                      Contact Support
-                    </a>
-                  </div>
+                    <span className="text-success me-2 fw-bold">
+                      Q{index + 1}.
+                    </span>
+                    {item.question}
+                  </button>
+                </h2>
+                <div
+                  id={`collapse${index}`}
+                  className="accordion-collapse collapse"
+                  data-bs-parent="#faqAccordion"
+                >
+                  <div className="accordion-body">{item.answer}</div>
                 </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Contact Support Card */}
+          <div className="unified-card mt-5">
+            <div className="unified-card-body text-center">
+              <h3 className="h4 fw-bold mb-3">
+                Didn't find the answer to your question?
+              </h3>
+              <p className="text-muted mb-4">
+                Our support team is ready to help you anytime
+              </p>
+              <div className="d-flex gap-3 justify-content-center flex-wrap">
+                <a
+                  href="mailto:support@blockstorm.com"
+                  className="btn btn-unified-primary"
+                >
+                  <i className="bi bi-envelope me-2"></i>
+                  Contact Support
+                </a>
               </div>
             </div>
           </div>

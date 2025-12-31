@@ -4,128 +4,78 @@ import { BLOCKS, BLOCK_PRICE } from "@/shared/config/constants";
 import { useApp } from "@/app/providers/AppProvider";
 
 export const Footer = () => {
-  const { gridModel, adsModel } = useApp();
+  const { adsModel } = useApp();
   const currentYear = new Date().getFullYear();
 
-  // Total blocks in the grid
   const totalBlocks = BLOCKS * BLOCKS;
-
-  // Count purchased blocks from ads
   const purchasedCount = adsModel.purchasedAds.reduce(
     (sum, ad) => sum + ad.blocks.length,
     0
   );
-
-  // Calculate available blocks
   const availableBlocks = totalBlocks - purchasedCount;
-
-  // Calculate percentage
   const purchasedPercentage = ((purchasedCount / totalBlocks) * 100).toFixed(1);
-
-  // Calculate revenue from sold blocks
   const totalRevenue = purchasedCount * BLOCK_PRICE;
-
-  // Calculate maximum potential revenue
   const maxPotentialRevenue = totalBlocks * BLOCK_PRICE;
 
-  const footerSections = [
+  const stats = [
     {
-      title: "About",
-      links: [
-        { label: "About Us", href: "#" },
-        { label: "Contact", href: "#" },
-        { label: "Careers", href: "#" },
-        { label: "Advertise", href: "#" },
-      ],
+      value: totalBlocks.toLocaleString(),
+      label: "Total Blocks",
+      color: "text-success",
     },
     {
-      title: "Services",
-      links: [
-        { label: "Buy Advertising Space", href: "#" },
-        { label: "Pricing", href: "#" },
-        { label: "How It Works", href: "#" },
-        { label: "FAQ", href: "/faq" },
-      ],
+      value: purchasedCount.toLocaleString(),
+      label: "Sold",
+      color: "text-warning",
     },
     {
-      title: "Legal",
-      links: [
-        { label: "Terms of Service", href: "#" },
-        { label: "Privacy Policy", href: "#" },
-        { label: "Cookie Policy", href: "#" },
-        { label: "Disclaimer", href: "#" },
-      ],
+      value: availableBlocks.toLocaleString(),
+      label: "Available",
+      color: "text-info",
     },
     {
-      title: "Connect",
-      links: [
-        { label: "Twitter", href: "#" },
-        { label: "Facebook", href: "#" },
-        { label: "LinkedIn", href: "#" },
-        { label: "Instagram", href: "#" },
-      ],
+      value: `$${BLOCK_PRICE}`,
+      label: "Per Block",
+      color: "text-success",
+    },
+    {
+      value: `$${
+        totalRevenue >= 1000
+          ? `${(totalRevenue / 1000).toFixed(1)}K`
+          : totalRevenue.toLocaleString()
+      }`,
+      label: "Revenue",
+      color: "text-success",
+    },
+    {
+      value: `$${(maxPotentialRevenue / 1000000).toFixed(1)}M`,
+      label: "Max Potential",
+      color: "text-success",
     },
   ];
 
   return (
-    <footer className="bg-light">
-      <div className="container">
-        {/* Bottom Footer */}
-        <div className="row align-items-center">
-          <div className="col-md-6 text-center text-md-start mb-3 mb-md-0">
-            <p className="text-muted mb-0" style={{ fontSize: "0.9rem" }}>
-              © {currentYear} BlockStorm. All rights reserved.
-            </p>
+    <footer className="mt-auto">
+      <div className="container py-4">
+        {/* Stats Section */}
+        <div className="mb-4">
+          <div className="row g-4 text-center">
+            {stats.map((stat, index) => (
+              <div key={index} className="col-lg-2 col-md-4 col-6">
+                <div className={`fw-bold fs-4 ${stat.color}`}>{stat.value}</div>
+                <div className="text-muted small text-uppercase">
+                  {stat.label}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
 
-        {/* Enhanced Stats Bar */}
-        <div className="row mt-4">
-          <div className="col-12">
-            <div className="bg-secondary bg-opacity-25 rounded p-3">
-              <div className="row text-center g-3">
-                <div className="col-lg-2 col-md-4 col-6">
-                  <div className="text-success fw-bold fs-4">
-                    {totalBlocks.toLocaleString()}
-                  </div>
-                  <div className="text-muted small">Total Blocks</div>
-                </div>
-                <div className="col-lg-2 col-md-4 col-6">
-                  <div className="text-warning fw-bold fs-4">
-                    {purchasedCount.toLocaleString()}
-                  </div>
-                  <div className="text-muted small">Sold</div>
-                </div>
-                <div className="col-lg-2 col-md-4 col-6">
-                  <div className="text-info fw-bold fs-4">
-                    {availableBlocks.toLocaleString()}
-                  </div>
-                  <div className="text-muted small">Available</div>
-                </div>
-                <div className="col-lg-2 col-md-4 col-6">
-                  <div className="text-success fw-bold fs-4">
-                    ${BLOCK_PRICE}
-                  </div>
-                  <div className="text-muted small">Per Block</div>
-                </div>
-                <div className="col-lg-2 col-md-4 col-6">
-                  <div className="text-success fw-bold fs-4">
-                    $
-                    {totalRevenue >= 1000
-                      ? `${(totalRevenue / 1000).toFixed(1)}K`
-                      : totalRevenue.toLocaleString()}
-                  </div>
-                  <div className="text-muted small">Revenue</div>
-                </div>
-                <div className="col-lg-2 col-md-4 col-6">
-                  <div className="text-success fw-bold fs-4">
-                    ${(maxPotentialRevenue / 1000000).toFixed(1)}M
-                  </div>
-                  <div className="text-muted small">Max Potential</div>
-                </div>
-              </div>
-            </div>
-          </div>
+        {/* Copyright */}
+        <div className="text-center pt-3">
+          <p className="text-muted mb-0" style={{ fontSize: "0.9rem" }}>
+            © {currentYear} BlockStorm. All rights reserved.
+          </p>
         </div>
       </div>
     </footer>

@@ -22,7 +22,7 @@ export const Header = ({ onPurchaseClick }) => {
   };
 
   return (
-    <nav className="navbar navbar-expand-md sticky-top navbar-body-bg">
+    <nav className="navbar navbar-expand-md sticky-top">
       <div className="container">
         <Link className="navbar-brand d-md-none" to="/">
           <span className="fs-4 fw-bold d-block lh-1">BlockStorm</span>
@@ -86,9 +86,7 @@ export const Header = ({ onPurchaseClick }) => {
                   {link.href.startsWith("/") ? (
                     <Link
                       className={`nav-link ${
-                        isActive(link.href)
-                          ? "active fw-semibold text-success"
-                          : ""
+                        isActive(link.href) ? "active fw-semibold" : ""
                       }`}
                       to={link.href}
                     >
@@ -125,7 +123,7 @@ export const Header = ({ onPurchaseClick }) => {
                   </svg>
 
                   {gridModel.selectedCount > 0 && (
-                    <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
+                    <span className="position-absolute top-0 start-100 translate-middle  rounded-pill unified-badge unified-badge-success">
                       ${formatPrice(gridModel.selectedCount)}
                       <span className="visually-hidden">cart total</span>
                     </span>
